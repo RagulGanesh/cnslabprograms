@@ -1,30 +1,23 @@
-# pip install pycrypto pip install base32hex
-import base32hex
-import hashlib
-from Crypto.Cipher import DES
-password = "Password"
-salt = '\x28\xAB\xBC\xCD\xDE\xEF\x00\x33'
-key = password + salt
-m = hashlib.md5(key)
-key = m.digest()
-(dk, iv) =(key[:8], key[8:])
-crypter = DES.new(dk, DES.MODE_CBC, iv)
+#pip install pyDes
+from pyDes import des, PAD_PKCS5
+import binascii
 
-plain_text= "I see you"
+# Key for encryption and decryption (8 bytes)
+key = b'12345678'
 
-print("The plain text is : ",plain_text)
-plain_text += '\x00' * (8 - len(plain_text) % 8)
+# Data to be encrypted
+data = b'This is a secret'
 
-#encrypt message
-ciphertext = crypter.encrypt(plain_text)
-encode_string= base32hex.b32encode(ciphertext)
-print("The encoded string is : ",encode_string)
+# Create a DES object with the specified key and mode
+cipher = des(key, PAD_PKCS5, IV=b'\0\0\0\0\0\0\0\0')
 
-encrypted_string='UH562EGM8RCHHTOUC5CTRS59OG======'
+# Encrypt the data
+encrypted_data = cipher.encrypt(data)
 
-print("The ecrypted string is : ",encrypted_string)
-encrypted_string=base32hex.b32decode(encrypted_string)
+# Decrypt the data
+decrypted_data = cipher.decrypt(encrypted_data)
 
-#decrypt message
-decrypted_string = crypter.decrypt(encrypted_string)
-print("The decrypted string is : ",decrypted_string)
+# Print the results
+print("Original data:", data)
+print("Encrypted data (hex):", binascii.hexlify(encrypted_data))
+print("Decrypted data:", decrypted_data.decode('utf-8'))
