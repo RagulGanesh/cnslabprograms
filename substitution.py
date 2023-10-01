@@ -1,4 +1,4 @@
-def sub_cipher(text, shift):
+def substitution_cipher(text, shift):
     result = ""
 
     for char in text:
@@ -13,10 +13,10 @@ def sub_cipher(text, shift):
 
 # Example usage
 plaintext = "Hello, World!"
-shift = int(input())  # You can change the shift value as needed
+shift = int(input("Enter shift value: "))  # You can change the shift value as needed
 print("Plain Tet:", plaintext)
-encrypted_text = sub_cipher(plaintext, shift)
+encrypted_text = substitution_cipher(plaintext, shift)
 print("Encrypted:", encrypted_text)
 
-decrypted_text = sub_cipher(encrypted_text, -shift)  # Decrypt by shifting back
-print("Decrypted:", decrypted_text)
+decrypted_text = substitution_cipher(encrypted_text, -shift)  # Decrypt by shifting back
+print("Decrypted:", decrypted_text)
