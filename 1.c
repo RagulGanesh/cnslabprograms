@@ -1,21 +1,13 @@
-#include<stdlib.h>
-
+#include <bits/stdc++.h>
+using namespace std;
 int main()
 {
-    char str[]="Hello World";
-    char str1[11];
-    int i,len;
-    len=strlen(str);
-    printf("The Plain Text: ");
-    for(i=0;i<len;i++)
+    string s = "Hello world";
+    string ans = "";
+    for (auto it : s)
     {
-    printf("%c", str[i]);
+        ans += (it ^ 0);
     }
-    printf("\nThe Cipher Text: ");
-    for(i=0;i<len;i++)
-    {
-    str1[i]=str[i]^0;
-    printf("%c",str1[i]);
-    }
-    printf("\n");
+    cout << "Original Text:" << s << endl;
+    cout << "Result:" << ans;
 }
