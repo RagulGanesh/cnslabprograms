@@ -1,4 +1,4 @@
-def caesar_cipher(text, shift):
+def sub_cipher(text, shift):
     result = ""
 
     for char in text:
@@ -15,8 +15,8 @@ def caesar_cipher(text, shift):
 plaintext = "Hello, World!"
 shift = int(input())  # You can change the shift value as needed
 print("Plain Tet:", plaintext)
-encrypted_text = caesar_cipher(plaintext, shift)
+encrypted_text = sub_cipher(plaintext, shift)
 print("Encrypted:", encrypted_text)
 
-decrypted_text = caesar_cipher(encrypted_text, -shift)  # Decrypt by shifting back
+decrypted_text = sub_cipher(encrypted_text, -shift)  # Decrypt by shifting back
 print("Decrypted:", decrypted_text)
