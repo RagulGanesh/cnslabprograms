@@ -1,24 +1,22 @@
-#pip install pycrypto
-
 from Crypto.Cipher import Blowfish
-cipher = Blowfish.new("key must be 4 to 56 bytes")
-# input data must multiple of 8
-data = input("Enter the data that need to encrypt: ")
-encrypted_data = cipher.encrypt(data)
-print("The encrypted message is: ", encrypted_data)
+from Crypto.Random import get_random_bytes
 
-print(encrypted_data.hex())
+# Generate a random encryption key (must be 16, 24, or 32 bytes long)
+key = get_random_bytes(16)
 
+# Create a Blowfish cipher
+cipher = Blowfish.new(key, Blowfish.MODE_ECB)  # ECB mode is used for simplicity; use other modes for better security
 
-from Crypto.Cipher import Blowfish
-cipher = Blowfish.new("key must be 4 to 56 bytes")
-# input data must multiple of 8
-data = input("Enter the data that need to encrypt: ")
+# Text to be encrypted (must be a multiple of 8 bytes for ECB mode)
+plaintext = b'Hello, Blowfish!'
 
-#encrypt message
-encrypted_data = cipher.encrypt(data)
-print("The encrypted message is: ", encrypted_data)
+# Encrypt the text
+ciphertext = cipher.encrypt(plaintext)
 
-#decrypt message
-decrypted_data = cipher.decrypt(encrypted_data)
-print("The decrypted or original message is: ", decrypted_data )
+# Decrypt the text
+decrypted_text = cipher.decrypt(ciphertext)
+
+# Print the results
+print("Original text:", plaintext.decode())
+print("Encrypted text:", ciphertext)
+print("Decrypted text:", decrypted_text.decode())
